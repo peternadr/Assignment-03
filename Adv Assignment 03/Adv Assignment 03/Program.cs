@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Runtime.ExceptionServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Adv_Assignment_03
@@ -110,50 +111,108 @@ namespace Adv_Assignment_03
             #endregion
 
             #region Leaderboard
-            //Create a leaderboard that automatically sorts players by score.
-            SortedDictionary<int, string> leaderBoard = new SortedDictionary<int, string>();
+            ////Create a leaderboard that automatically sorts players by score.
+            //SortedDictionary<int, string> leaderBoard = new SortedDictionary<int, string>();
 
-            //Add items to leaderboard
-            leaderBoard.Add(500, "Ahmed");
-            leaderBoard.Add(200, "Sara");
-            leaderBoard.Add(800, "Ali");
-            leaderBoard.Add(350, "Mona");
+            ////Add items to leaderboard
+            //leaderBoard.Add(500, "Ahmed");
+            //leaderBoard.Add(200, "Sara");
+            //leaderBoard.Add(800, "Ali");
+            //leaderBoard.Add(350, "Mona");
 
-            //Print all entries
-            Console.Write("All entries: ");
-            foreach (var item in leaderBoard)
+            ////Print all entries
+            //Console.Write("All entries: ");
+            //foreach (var item in leaderBoard)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine();
+
+            ////Access the first key and first value 
+            //Console.WriteLine(leaderBoard.FirstOrDefault());
+            //Console.WriteLine(leaderBoard.LastOrDefault());
+            //Console.WriteLine();
+
+            ////Check if score 500 exists
+            //Console.Write("Check if 500 exists: ");
+            //Console.Write(leaderBoard.ContainsKey(500));
+            //Console.WriteLine();
+            //Console.WriteLine();
+
+            ////Safely get the player with score 999
+            //if (leaderBoard.ContainsKey(999))
+            //    Console.WriteLine(leaderBoard[999]);
+
+            ////Remove the player with score 200 
+            //leaderBoard.Remove(200);
+
+            ////print the updated list
+            //Console.Write("All entries: ");
+            //foreach (var item in leaderBoard)
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            //Console.WriteLine();
+
+            #endregion
+
+            #region Phone Book
+            //Create a Collection  with 4 contacts (name → phone number)
+            Dictionary<int, string> phoneBook = new Dictionary<int, string>()
             {
-                Console.Write($"{item} ");
+                {101,"01586375943" },
+                {102,"01256347851" },
+                {103,"01025493578" },
+                {104,"01188944321" }
+
+            };
+
+            //Add a new contact using [] syntax
+            phoneBook[105] = "01158416269";
+
+            //Try adding a duplicate using .Add()
+            try
+            {
+                phoneBook.Add(102, "01255594516");
+            }catch(Exception ex)
+            {
+                Console.WriteLine("This key is exisits already");
             }
             Console.WriteLine();
+
+            //Try adding a duplicate using .TryAdd() 
+            bool valid = phoneBook.TryAdd(102, "01255559347");
+            if (!valid)
+                Console.WriteLine("This key is exisits already");
+            else
+                Console.WriteLine("Add successfully");
             Console.WriteLine();
 
-            //Access the first key and first value 
-            Console.WriteLine(leaderBoard.FirstOrDefault());
-            Console.WriteLine(leaderBoard.LastOrDefault());
+            //Search for a contact that doesn’t exist
+            if (phoneBook.TryGetValue(106, out string found))
+                Console.WriteLine(found);
+            else
+                Console.WriteLine("This item not found");
             Console.WriteLine();
 
-            //Check if score 500 exists
-            Console.Write("Check if 500 exists: ");
-            Console.Write(leaderBoard.ContainsKey(500));
+            //Get a contact with a fallback of "Not Found"
+            int id = 105;
+            string contact = phoneBook.TryGetValue(id, out string phone) ? phone : "Not Found";
+            Console.WriteLine(contact);
             Console.WriteLine();
-            Console.WriteLine();
 
-            //Safely get the player with score 999
-            if (leaderBoard.ContainsKey(999))
-                Console.WriteLine(leaderBoard[999]);
-
-            //Remove the player with score 200 
-            leaderBoard.Remove(200);
-
-            //print the updated list
-            Console.Write("All entries: ");
-            foreach (var item in leaderBoard)
+            //Print all Keys on one line, then all Values on another line
+            foreach (var item in phoneBook.Keys)
             {
-                Console.Write($"{item} ");
+                Console.Write($"{item}  ");
             }
             Console.WriteLine();
-
+            foreach (var item in phoneBook.Values)
+            {
+                Console.Write($"{item}  ");
+            }
+            Console.WriteLine();
             #endregion
         }
     }
