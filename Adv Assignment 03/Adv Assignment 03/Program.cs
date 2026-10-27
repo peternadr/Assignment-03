@@ -267,48 +267,101 @@ namespace Adv_Assignment_03
 
             #region Print Queue Simulator
             //Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf", "Letter.docx", "Resume.pdf", "Photo.jpg"
-            Queue<string> documents = new Queue<string>();
-            documents.Enqueue("Report.pdf");
-            documents.Enqueue("Invoice.pdf");
-            documents.Enqueue("Letter.docx");
-            documents.Enqueue("Resume.pdf");
-            documents.Enqueue("Photo.jpg");
+            //Queue<string> documents = new Queue<string>();
+            //documents.Enqueue("Report.pdf");
+            //documents.Enqueue("Invoice.pdf");
+            //documents.Enqueue("Letter.docx");
+            //documents.Enqueue("Resume.pdf");
+            //documents.Enqueue("Photo.jpg");
 
 
-            //Print the queue contents and Count
-            foreach (var item in documents)
+            ////Print the queue contents and Count
+            //foreach (var item in documents)
+            //{
+            //    Console.Write($"{item}  ");
+            //}
+            //Console.WriteLine();
+
+            //Console.WriteLine($"The count of documents: { documents.Count}");
+            //Console.WriteLine();
+
+
+            ////Use Peek to see which document will print next (without removing)
+            //Console.WriteLine(documents.Peek());
+            //Console.WriteLine();
+
+            ////Process the queue: **Dequeue** each document and print "Printing: [name]"
+            //while (documents.Count > 0)
+            //{
+            //    string document = documents.Dequeue();
+            //    Console.WriteLine($"Printing: {document}");
+            //}
+            //Console.WriteLine();
+
+
+            ////Try TryDequeue on the now-empty queue — what happens?
+            //if (documents.TryDequeue(out string? x))
+            //{
+            //    Console.WriteLine($"Printing: {x}");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Queue is empty");
+            //}
+
+
+            #endregion
+
+            #region Browser History (Undo)
+            //Create a Stack<string> for browser history
+            Stack<string> BrowserHistory = new Stack<string>();
+
+            //Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com", "claude.ai"
+            BrowserHistory.Push("google.com");
+            BrowserHistory.Push("github.com");
+            BrowserHistory.Push("stackoverflow.com");
+            BrowserHistory.Push("youtube.com");
+            BrowserHistory.Push("claude.ai");
+
+            //Use Peek to see the current page (top of stack)
+            Console.WriteLine(BrowserHistory.Peek());
+            Console.WriteLine();
+
+            //Press "back" 3 times using Pop — print each page you leave
+            for (int i = 0; i < 3; i++)
             {
-                Console.Write($"{item}  ");
+                if (BrowserHistory.Count > 0)
+                {
+                    string page = BrowserHistory.Pop();
+                    Console.WriteLine($"Leaving: {page}");
+                }
             }
             Console.WriteLine();
 
-            Console.WriteLine($"The count of documents: { documents.Count}");
-            Console.WriteLine();
-
-
-            //Use Peek to see which document will print next (without removing)
-            Console.WriteLine(documents.Peek());
-            Console.WriteLine();
-
-            //Process the queue: **Dequeue** each document and print "Printing: [name]"
-            while (documents.Count > 0)
+            //Print the current page after going back
+            if (BrowserHistory.Count > 0)
             {
-                string document = documents.Dequeue();
-                Console.WriteLine($"Printing: {document}");
-            }
-            Console.WriteLine();
-
-
-            //Try TryDequeue on the now-empty queue — what happens?
-            if (documents.TryDequeue(out string? x))
-            {
-                Console.WriteLine($"Printing: {x}");
+                Console.WriteLine($"Current page: {BrowserHistory.Peek()}");
             }
             else
             {
-                Console.WriteLine("Queue is empty");
+                Console.WriteLine("No pages left");
             }
+            Console.WriteLine();
 
+
+            //Try TryPop on an empty stack — what happens?
+            BrowserHistory.Pop();
+            BrowserHistory.Pop();
+            
+            if (BrowserHistory.TryPop(out string? x))
+            {
+                Console.WriteLine($"Leaving: {x}");
+            }
+            else
+            {
+                Console.WriteLine("Stack is empty");
+            }
 
             #endregion
         }
