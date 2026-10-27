@@ -217,51 +217,98 @@ namespace Adv_Assignment_03
 
             #region Unique Email Validator
             //Create a HashSet<string> with a case-insensitive comparer
-            HashSet<string> EmailAddress = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            //HashSet<string> EmailAddress = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            //{
+            //    "ahmed@test.com", 
+            //    "AHMED@test.com", 
+            //    "sara@test.com", 
+            //    "Sara@Test.Com"
+            //};
+
+            ////print count . Explain why
+            //Console.WriteLine(EmailAddress.Count);//2
+            //// HashSet Add only Unique Emails
+
+
+            ////Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
+            //HashSet<int> A = [1, 2, 3, 4, 5];
+            //HashSet<int> B = [4, 5, 6, 7, 8];
+
+            ////Print the result of: UnionWith, IntersectWith, ExceptWith
+            //HashSet<int> union = new HashSet<int>(A);
+
+            //union.UnionWith(B);
+            //foreach (int i in union)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine("--------------------------");
+
+            //union.IntersectWith(B);
+            //foreach (int i in union)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine("--------------------------");
+
+            //union.ExceptWith(B);
+            //foreach (int i in union)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine("--------------------------");
+            //Console.WriteLine();
+
+            ////Use IsSubsetOf to check if {1,2} is a subset of Set A
+            //HashSet<int> C = [1, 2];
+            //Console.WriteLine(C.IsSubsetOf(A));
+
+            #endregion
+
+            #region Print Queue Simulator
+            //Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf", "Letter.docx", "Resume.pdf", "Photo.jpg"
+            Queue<string> documents = new Queue<string>();
+            documents.Enqueue("Report.pdf");
+            documents.Enqueue("Invoice.pdf");
+            documents.Enqueue("Letter.docx");
+            documents.Enqueue("Resume.pdf");
+            documents.Enqueue("Photo.jpg");
+
+
+            //Print the queue contents and Count
+            foreach (var item in documents)
             {
-                "ahmed@test.com", 
-                "AHMED@test.com", 
-                "sara@test.com", 
-                "Sara@Test.Com"
-            };
-
-            //print count . Explain why
-            Console.WriteLine(EmailAddress.Count);//2
-            // HashSet Add only Unique Emails
-
-
-            //Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
-            HashSet<int> A = [1, 2, 3, 4, 5];
-            HashSet<int> B = [4, 5, 6, 7, 8];
-
-            //Print the result of: UnionWith, IntersectWith, ExceptWith
-            HashSet<int> union = new HashSet<int>(A);
-
-            union.UnionWith(B);
-            foreach (int i in union)
-            {
-                Console.WriteLine(i);
+                Console.Write($"{item}  ");
             }
-            Console.WriteLine("--------------------------");
-
-            union.IntersectWith(B);
-            foreach (int i in union)
-            {
-                Console.WriteLine(i);
-            }
-            Console.WriteLine("--------------------------");
-
-            union.ExceptWith(B);
-            foreach (int i in union)
-            {
-                Console.WriteLine(i);
-            }
-            Console.WriteLine("--------------------------");
             Console.WriteLine();
 
-            //Use IsSubsetOf to check if {1,2} is a subset of Set A
-            HashSet<int> C = [1, 2];
-            Console.WriteLine(C.IsSubsetOf(A));
+            Console.WriteLine($"The count of documents: { documents.Count}");
+            Console.WriteLine();
+
+
+            //Use Peek to see which document will print next (without removing)
+            Console.WriteLine(documents.Peek());
+            Console.WriteLine();
+
+            //Process the queue: **Dequeue** each document and print "Printing: [name]"
+            while (documents.Count > 0)
+            {
+                string document = documents.Dequeue();
+                Console.WriteLine($"Printing: {document}");
+            }
+            Console.WriteLine();
+
+
+            //Try TryDequeue on the now-empty queue — what happens?
+            if (documents.TryDequeue(out string? x))
+            {
+                Console.WriteLine($"Printing: {x}");
+            }
+            else
+            {
+                Console.WriteLine("Queue is empty");
+            }
+
 
             #endregion
         }
