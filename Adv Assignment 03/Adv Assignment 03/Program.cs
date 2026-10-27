@@ -158,61 +158,111 @@ namespace Adv_Assignment_03
             #endregion
 
             #region Phone Book
-            //Create a Collection  with 4 contacts (name → phone number)
-            Dictionary<int, string> phoneBook = new Dictionary<int, string>()
-            {
-                {101,"01586375943" },
-                {102,"01256347851" },
-                {103,"01025493578" },
-                {104,"01188944321" }
+            ////Create a Collection  with 4 contacts (name → phone number)
+            //Dictionary<int, string> phoneBook = new Dictionary<int, string>()
+            //{
+            //    {101,"01586375943" },
+            //    {102,"01256347851" },
+            //    {103,"01025493578" },
+            //    {104,"01188944321" }
 
+            //};
+
+            ////Add a new contact using [] syntax
+            //phoneBook[105] = "01158416269";
+
+            ////Try adding a duplicate using .Add()
+            //try
+            //{
+            //    phoneBook.Add(102, "01255594516");
+            //}catch(Exception ex)
+            //{
+            //    Console.WriteLine("This key is exisits already");
+            //}
+            //Console.WriteLine();
+
+            ////Try adding a duplicate using .TryAdd() 
+            //bool valid = phoneBook.TryAdd(102, "01255559347");
+            //if (!valid)
+            //    Console.WriteLine("This key is exisits already");
+            //else
+            //    Console.WriteLine("Add successfully");
+            //Console.WriteLine();
+
+            ////Search for a contact that doesn’t exist
+            //if (phoneBook.TryGetValue(106, out string found))
+            //    Console.WriteLine(found);
+            //else
+            //    Console.WriteLine("This item not found");
+            //Console.WriteLine();
+
+            ////Get a contact with a fallback of "Not Found"
+            //int id = 105;
+            //string contact = phoneBook.TryGetValue(id, out string phone) ? phone : "Not Found";
+            //Console.WriteLine(contact);
+            //Console.WriteLine();
+
+            ////Print all Keys on one line, then all Values on another line
+            //foreach (var item in phoneBook.Keys)
+            //{
+            //    Console.Write($"{item}  ");
+            //}
+            //Console.WriteLine();
+            //foreach (var item in phoneBook.Values)
+            //{
+            //    Console.Write($"{item}  ");
+            //}
+            //Console.WriteLine();
+            #endregion
+
+            #region Unique Email Validator
+            //Create a HashSet<string> with a case-insensitive comparer
+            HashSet<string> EmailAddress = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "ahmed@test.com", 
+                "AHMED@test.com", 
+                "sara@test.com", 
+                "Sara@Test.Com"
             };
 
-            //Add a new contact using [] syntax
-            phoneBook[105] = "01158416269";
+            //print count . Explain why
+            Console.WriteLine(EmailAddress.Count);//2
+            // HashSet Add only Unique Emails
 
-            //Try adding a duplicate using .Add()
-            try
+
+            //Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
+            HashSet<int> A = [1, 2, 3, 4, 5];
+            HashSet<int> B = [4, 5, 6, 7, 8];
+
+            //Print the result of: UnionWith, IntersectWith, ExceptWith
+            HashSet<int> union = new HashSet<int>(A);
+
+            union.UnionWith(B);
+            foreach (int i in union)
             {
-                phoneBook.Add(102, "01255594516");
-            }catch(Exception ex)
-            {
-                Console.WriteLine("This key is exisits already");
+                Console.WriteLine(i);
             }
-            Console.WriteLine();
+            Console.WriteLine("--------------------------");
 
-            //Try adding a duplicate using .TryAdd() 
-            bool valid = phoneBook.TryAdd(102, "01255559347");
-            if (!valid)
-                Console.WriteLine("This key is exisits already");
-            else
-                Console.WriteLine("Add successfully");
-            Console.WriteLine();
-
-            //Search for a contact that doesn’t exist
-            if (phoneBook.TryGetValue(106, out string found))
-                Console.WriteLine(found);
-            else
-                Console.WriteLine("This item not found");
-            Console.WriteLine();
-
-            //Get a contact with a fallback of "Not Found"
-            int id = 105;
-            string contact = phoneBook.TryGetValue(id, out string phone) ? phone : "Not Found";
-            Console.WriteLine(contact);
-            Console.WriteLine();
-
-            //Print all Keys on one line, then all Values on another line
-            foreach (var item in phoneBook.Keys)
+            union.IntersectWith(B);
+            foreach (int i in union)
             {
-                Console.Write($"{item}  ");
+                Console.WriteLine(i);
             }
-            Console.WriteLine();
-            foreach (var item in phoneBook.Values)
+            Console.WriteLine("--------------------------");
+
+            union.ExceptWith(B);
+            foreach (int i in union)
             {
-                Console.Write($"{item}  ");
+                Console.WriteLine(i);
             }
+            Console.WriteLine("--------------------------");
             Console.WriteLine();
+
+            //Use IsSubsetOf to check if {1,2} is a subset of Set A
+            HashSet<int> C = [1, 2];
+            Console.WriteLine(C.IsSubsetOf(A));
+
             #endregion
         }
     }
